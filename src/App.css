@@ -1,0 +1,27 @@
+@import "antd/dist/antd.css";
+html {
+  font-family: "M PLUS Rounded 1c";
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+@-ms-viewport {
+  width: device-width;
+}
+body {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-family: "M PLUS Rounded 1c";
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  background-color: #fff;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum";
+  min-width: 1250px;
+}
+[tabindex="-1"]:focus {
+  outline: none !important;
+}

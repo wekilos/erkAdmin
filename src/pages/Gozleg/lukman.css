@@ -1,0 +1,28 @@
+
+.lukman{
+    background-color: #F5F5F5;
+    
+  }
+  .lukman--top{
+    margin-top: 0px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+  }
+  .lukman--header{
+    margin-left: 20px;
+    font-family: sans-serif;
+    font-size: 36px;
+    font-weight: 900;
+  }
+  .lukman--gosh{
+    float: right;
+    margin-right: 20px;
+    margin-top: 20px;
+  }
+  .lukman--gozleg{
+    display:inline-flex;
+   width: 100%;
+  }
+  
+  

@@ -1,0 +1,14 @@
+.LukmanTable{
+    width: 100%;
+    /* background-color:#1890ff; */
+    margin: 0 auto;
+
+}
+.lukmanGoshmachaLi{
+    margin: 10px;
+    font-size: 17px;
+}
+.lukmanGoshmachaUl{
+    list-style: none;
+    margin: 0 auto;
+}

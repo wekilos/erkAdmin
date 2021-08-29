@@ -1,0 +1,126 @@
+/* .trigger {
+  font-size: 22px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  z-index: 1;
+} */
+
+/* .trigger:hover {
+  color: red;
+} */
+
+.toggle {
+  position: fixed;
+  top: 30px;
+  z-index: 1;
+  color: black;
+}
+
+.logo {
+  height: 32px;
+  width: 80%;
+  font-size: 22px;
+  font-weight: 900;
+  margin-top: 15px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+/* .site-layout .site-layout-background {
+    background: #fff;  
+} 
+*/
+.Sider {
+  background: #fff;
+  user-select: none;
+  position: fixed;
+}
+
+.Sider::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.header {
+  padding: 0;
+  position: sticky;
+  width: 100%;
+  height: 60px;
+  box-shadow: 0 2px 2px 0px rgb(185, 181, 181);
+}
+
+.content {
+  margin: 5px 5px;
+
+  height: 100% !important;
+  min-height: 100vh;
+}
+
+.search {
+  width: 300px;
+  margin-left: 5%;
+  position: absolute;
+  margin-top: 15px;
+}
+
+.profile {
+  position: fixed;
+  right: 20px;
+  top: -4px;
+  font-size: 22px;
+}
+
+.notify {
+  position: fixed;
+  right: 70px;
+  top: -4px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.menuitem {
+  font-size: 16px;
+  font-weight: 600;
+  user-select: none;
+}
+
+
+/* .ant-tooltip-inner {
+  color: #fff;
+  background-color: #fd0018;
+} */
+ 
+.ant-menu-submenu-title:hover{
+  background-color: #e6f7ff;
+}
+.menuitem2:hover{
+  background-color: #e6f7ff;
+}
+.sidebar-logout {
+  position: relative;
+  margin-top: 20px;
+  left: 30px;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: rgb(100, 94, 94);
+}
+
+.sidebar-logout:hover {
+  color: #010101;
+}
+
+.admin-footer {
+  margin-top: 35px;
+  left: 20px;
+}
+
+.sidebar-left {
+  min-height: 80vh;
+  background-color: #fff;
+  color: #010101;
+}

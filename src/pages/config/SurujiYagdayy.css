@@ -1,0 +1,22 @@
+
+
+
+.suruji-yagdayy--form{
+    width: 100%;
+    background-color: inherit;
+    margin: 0 auto;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.suruji-yagdayy--form .ant-input-group-addon{
+    width: 85px;
+}
+.suruji-yagdayy--input{
+ width:45%;
+ margin: 10px;
+
+}
+.suruji-yagdayy--button{
+    margin: 5px;
+}

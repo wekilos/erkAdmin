@@ -1,0 +1,32 @@
+.ulanyjyTable{
+    width: 100%;
+    background-color: inherit;
+    margin: 0 auto;
+
+}
+
+.modalLi{
+    font-size: 17px;
+    margin: 10px;
+}
+
+.ulanyjy-uytget--input{
+    width:350px;   
+    margin: o auto;
+    margin: 5px;
+}
+
+.ulanyjylar-table--drawer .ant-input-group-addon{
+    width: 120px;
+}
+
+.Goshmacha--ul{
+    list-style: none;
+}
+.ulanyjylar-table--buttons{
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-evenly;
+
+}

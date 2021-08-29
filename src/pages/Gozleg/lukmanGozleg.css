@@ -1,0 +1,42 @@
+.lukman-gozleg{
+    background-color: #fff;
+    height: 75px;
+    width: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom: 2px solid #aaa;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 18px;
+    padding-right: 18px;
+    
+}
+.lukman-gozleg--form{
+    width: 100%;
+    margin: 0 auto;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   
+
+}
+
+.lukman-gozleg--input{
+ width:250px;
+ margin:15px;
+
+}
+
+.lukman-gozleg--button{
+    margin: 15px;
+}
+
+@media screen and (max-width:600px){
+    .lukman-gozleg--input{
+        display: inline;
+        justify-content:left;
+        width: 250px;
+    }
+}

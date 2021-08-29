@@ -1,0 +1,54 @@
+.yolHaty-gosh {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.yolHaty--form {
+  width: 100%;
+  background-color: inherit;
+  margin: 0 auto;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.yolHaty--form .ant-input-group-addon {
+  width: 120px;
+  text-align: left;
+}
+.yolHaty-gosh--input {
+  width: 350px;
+  margin: 5px;
+}
+.suruji {
+  width: 350px;
+  background-color: lightblue;
+}
+
+.yolHaty-gosh--button {
+  margin: 5px;
+}
+
+/* /////////////////    ant css     ////////////////////////////////// */
+.steps-content {
+  min-height: 200px;
+  margin: 0 auto;
+  padding-top: 10px;
+
+  text-align: center;
+  background-color: inherit;
+}
+
+.steps-action button {
+  margin: 5px;
+  margin-left: 0;
+}
+
+.step2-header {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  margin-bottom: 0;
+}
+.step2 {
+  padding: 0 2b0px;
+}

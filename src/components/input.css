@@ -1,0 +1,50 @@
+.InputDiv{
+    display: inline-flex;
+    width: 90%;
+    /* justify-content: ; */
+    margin: 0 auto;
+    height: 64px;
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+}
+
+.InputDiv>p{
+    width: 35%;
+    font-size: 12px;
+    text-align: left;
+    color: #BABABA;
+    line-height: 64px;
+    margin-left: 10px;
+}
+
+.InputDiv>input{
+    background-color: #fff;
+    border-radius: 12px;
+    border: none;
+    font-size: 14px;
+    color: #252525;
+    height: 64px;
+    width: 65%;
+    margin: 0;
+}
+.InputDiv>input  :focus{
+    border:none;
+    outline: none;
+    outline-offset: 0px;
+}
+
+.InputDiv>input :focus-visible {
+    border:none;
+    outline: none;
+}
+
+.InputDiv>input  :focus-within {
+    border:none;
+    outline: none;
+}
+.InputDiv>input  :active{
+    border:none;
+    outline: none;
+
+}

@@ -1,0 +1,15 @@
+.user-filter {
+  background-color: #fff;
+  height: 75px;
+  width: 100%;
+
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom: 2px solid #aaa;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 18px;
+  padding-right: 18px;
+}
