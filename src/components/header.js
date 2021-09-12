@@ -20,7 +20,7 @@ const profile_menu = (
         <UserOutlined /> Profile
       </a> */}
     </Menu.Item>
-    <Menu.Item>
+    <Menu.Item >
       <a target="_blank" rel="noopener noreferrer">
         <LogoutOutlined /> Logout
       </a>

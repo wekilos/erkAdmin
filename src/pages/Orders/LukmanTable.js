@@ -259,6 +259,16 @@ const Gowshuryldy = (event)=>{
                              
                             {maglumat && maglumat.surat3 && <img style={{width:"400px", height:"200px",objectFit:"contain"}} src={BASE_URL+"/"+maglumat.surat3} alt="product Img" />}
                                 </div>
+                                <h1 style={{marginTop:"20px"}} className="modalLi" key={maglumat && maglumat.id}>
+                             Haryt Surat Admin Goşan
+                            </h1>
+                            <div>
+                            {maglumat && maglumat.surat4 && <img style={{width:"400px", height:"200px",objectFit:"contain"}} src={BASE_URL+"/"+maglumat.surat4} alt={BASE_URL+maglumat.product_image} />} 
+                            
+                            {maglumat && maglumat.surat5 && <img style={{width:"400px", height:"200px",objectFit:"contain"}} src={BASE_URL+"/"+maglumat.surat5} alt="product Img" />}
+                             
+                            {maglumat && maglumat.surat6 && <img style={{width:"400px", height:"200px",objectFit:"contain"}} src={BASE_URL+"/"+maglumat.surat6} alt="product Img" />}
+                                </div>
                             </React.Fragment>
                         }
                 </Drawer>

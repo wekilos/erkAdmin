@@ -29,18 +29,18 @@ password: password,
 } ).then((res)=>{
  
  console.log(res.data)
-  if(res.data.login===true){
+  if(res.data.login===true && res.data.type=="2"){
         localStorage.setItem("profile", JSON.stringify(res.data))
         message.success("Successfully")
-        if(res.data.type && res.data.type.type_tm==="admin"){
+        if(res.data.type && res.data.type==="2"){
           history.push('/orders')
         }else{
           history.push("/");
-          message.error("nädogry Telefon belgi yada password")
+          // message.error("nädogry Telefon belgi yada password")
         }
          
     }else{
-        message.warn(res.data.msg)
+        message.warn("nädogry Telefon belgi yada password")
     }
     
 

@@ -30,7 +30,7 @@ const App = () => {
             />
 
             <PublicRoute 
-            restricted={false} 
+            restricted={true} 
             component={Login} 
             path="/" 
             exact 

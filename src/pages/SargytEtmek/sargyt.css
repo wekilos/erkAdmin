@@ -38,18 +38,18 @@
      height: 45px;
  }
  .upload-input{
-     position: relative;
-     height: 45px;
-     width: 350px;
- }
- .upload-input img{
-     position: absolute;
-     top: 17px;
-     right: 35px;
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
- }
+    position: relative;
+    height: 45px;
+    width: 350px;
+}
+.upload-input img{
+    position: absolute;
+    top: 17px;
+    right: 35px;
+   width: 40px;
+   height: 40px;
+   object-fit: contain;
+}
  .sargyt-form .ant-select-selection-placeholder{
     height: 45px !important;
     line-height: 45px !important;

@@ -20,3 +20,46 @@
 .suruji-yagdayy--button{
     margin: 5px;
 }
+
+.upload-input{
+    position: relative;
+    height: 45px;
+    width: 350px;
+}
+.upload-input img{
+    position: absolute;
+    top: 5px;
+    right: 35px;
+   width: 40px;
+   height: 40px;
+   object-fit: contain;
+}
+.sargyt-form .ant-select-selection-placeholder{
+    height: 45px !important;
+    line-height: 45px !important;
+    font-size: 15px !important;
+    margin-left: 15px;
+ }
+ .sargyt-form .ant-select-selection-item{
+     height: 45px !important;
+     line-height: 45px !important;
+     font-size: 15px !important;
+ }
+
+ .form-inputs{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+ }
+
+ .form-inputs .form-input{
+     width: 350px ;
+     margin-top: 15px;
+ }
+ .form-inputs .ant-input{
+     height: 45px ;
+ }
+
+ .upload-input  .ant-input-group-addon{
+     height: 55px;
+ }

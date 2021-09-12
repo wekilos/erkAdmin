@@ -18,7 +18,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isLoginAdmin() || true  ? (
+        isLoginAdmin()   ? (
           <Layout>
             <Suspense fallback={<Loading />}>
               <Sidebar />

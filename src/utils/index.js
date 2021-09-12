@@ -1,5 +1,6 @@
 export const logout = () => {
     localStorage.removeItem("profile");
+    window.location.href="/"
   };
   
   export const isLogin = () => {

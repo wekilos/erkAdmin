@@ -7,6 +7,7 @@ import { PlusCircleFilled,CloseCircleOutlined } from '@ant-design/icons';
 import './SurujiYagdayy.css';
 import TextArea from 'antd/lib/input/TextArea';
 import { axiosInstance } from '../../utils/axiosIntance';
+import upload from "../../img/upload.png";
 
 const Option = {Select};
 
@@ -16,6 +17,9 @@ const SurujiYagdayy = props =>{
     const [status,setStatus ] = useState([]);
     const [statusId,setStatusId] = useState();
     const [yukHazir,setYukHazir] = useState();
+    const [img1,setImg1]= useState();
+    const [img2,setImg2]= useState();
+    const [img3,setImg3]= useState();
     console.log("orders",emaglumat);
 
     useEffect(()=>{
@@ -52,6 +56,57 @@ const SurujiYagdayy = props =>{
     }
     
 
+    const SuratGosh = async()=>{
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+            });
+            console.log("surat",img1)
+            let surat1={};
+            let surat2={};
+            let surat3={};
+            if(img1){
+             surat1 = {
+                  img_name:img1.name,
+                  img:await toBase64(img1)
+                }
+            }else{surat1 = null}
+            if(img2){
+            surat2 = {
+                img_name:img2.name,
+                img:await toBase64(img2)
+                } 
+            }else{surat2=null}
+            if(img3){
+            surat3 = {
+                img_name:img3.name,
+                img:await toBase64(img3)
+                } 
+            }else{surat3=null}  
+
+          let data={
+                surat4:surat1,
+                surat5:surat2,
+                surat6:surat3,
+            }
+            console.log("data:",data)
+            console.log(img1,img2,img3)
+        axiosInstance.patch("/api/sargyt/update/admin/"+emaglumat.id,{
+                data
+        }).then((data)=>{
+            console.log(data.data);
+            message.success("successfully");
+            getOrders();
+            setImg1(null);
+            setImg2(null);
+            setImg3(null);
+        }).catch((err)=>{
+            console.log("errorr createing sargyt",err);
+            message.error("maglumatlary dogry giriziň")
+        })
+    }
  
       
 
@@ -83,8 +138,30 @@ const SurujiYagdayy = props =>{
             <Option value="6" >Gowşurma nokadyna ugradyldy</Option>
           </Select>
 
-                <Button onClick={Uytget} icon={<PlusCircleFilled/>} shape='round' type='primary' className='suruji-yagdayy--button'>Unit üýtget</Button>
+                <Button onClick={Uytget} icon={<PlusCircleFilled/>} shape='round' type='primary' className='suruji-yagdayy--button'>Status üýtget</Button>
                 <Button onClick={props.onClick} shape='round' danger type='primary' className='suruji-yagdayy--button'>Goýbolsun</Button>
+            </form>
+            <form style={{marginTop:"30px",height:"45px"}}>
+                    <div className="upload-input" style={{height:"45px"}}>
+                        <Input  onChange={(e)=>setImg1(e.target.files[0])} hidden id="file-upload-button1" type="file" addonBefore={img1?"Ýüklendi":"Haryt Surat 1"} className="form-input" />
+                        <label for="file-upload-button1">
+                            <img for="file-upload-button1" src={upload} alt="upload"/>
+                        </label>
+                    </div>
+                    <div className="upload-input" style={{marginTop:"30px",height:"45px"}} >
+                        <Input onChange={(e)=>setImg2(e.target.files[0])} hidden id="file-upload-button2" type="file" addonBefore={img2?"Ýüklendi":"Haryt Surat 2"} className="form-input" />
+                        <label for="file-upload-button2">
+                            <img for="file-upload-button2" src={upload} alt="upload"/>
+                        </label>
+                    </div>
+                    <div className="upload-input" style={{marginTop:"30px",height:"45px"}}>
+                        <Input onChange={(e)=>setImg3(e.target.files[0])} hidden id="file-upload-button3" type="file" addonBefore={img3?"Ýüklendi":"Haryt Surat 3"} className="form-input" />
+                        <label for="file-upload-button3">
+                            <img for="file-upload-button3" src={upload} alt="upload"/>
+                        </label>
+                    </div>
+                    <Button style={{width:"45%",margin:"30px 100px"}} onClick={SuratGosh} icon={<PlusCircleFilled/>} shape='round' type='primary' className='suruji-yagdayy--button'>Surat goş</Button>
+            
             </form>
         </div>
     );
