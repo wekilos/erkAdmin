@@ -10,12 +10,13 @@ import {
   RiseOutlined,
   SettingOutlined,
   DashboardOutlined,
+  SearchOutlined,
   LogoutOutlined,
   HeartFilled,
   ScheduleOutlined,
-  CarOutlined,
-  ToolOutlined,
-  FileTextOutlined,CalculatorOutlined,HomeOutlined
+  FormOutlined,
+  AlignLeftOutlined,
+  FileTextOutlined
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -93,7 +94,7 @@ export default class SiderDemo extends React.Component {
             key="sub1"
             title={
               <span>
-                {/* <DashboardOutlined /> */}
+                <DashboardOutlined />
                 <span className="menuitem ">Sargytlar</span>
               </span>
             }
@@ -116,6 +117,7 @@ export default class SiderDemo extends React.Component {
             key="sub2"
             title={
               <span className="menuitem">
+                <SearchOutlined />
                 <span>Haryt Gözleg</span>
               </span>
             }
@@ -134,7 +136,7 @@ export default class SiderDemo extends React.Component {
             key="sub3"
             title={
               <span className="menuitem">
-                {/* <CarOutlined /> */}
+                <FormOutlined />
                 <span>Sargyt et</span>
               </span>
             }
@@ -150,7 +152,7 @@ export default class SiderDemo extends React.Component {
             key="sub8"
             title={
               <span className="menuitem">
-                {/* <FileTextOutlined /> */}
+                <FileTextOutlined />
                 <span>Maglumatlar</span>
               </span>
             }
@@ -187,7 +189,7 @@ export default class SiderDemo extends React.Component {
             key="sub9"
             title={
               <span className="menuitem">
-               {/* <HomeOutlined /> */}
+               <AlignLeftOutlined />
                 <span>Config</span>
               </span>
             }

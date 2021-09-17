@@ -57,45 +57,13 @@ const SurujiYagdayy = props =>{
     
 
     const SuratGosh = async()=>{
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-            });
-            console.log("surat",img1)
-            let surat1={};
-            let surat2={};
-            let surat3={};
-            if(img1){
-             surat1 = {
-                  img_name:img1.name,
-                  img:await toBase64(img1)
-                }
-            }else{surat1 = null}
-            if(img2){
-            surat2 = {
-                img_name:img2.name,
-                img:await toBase64(img2)
-                } 
-            }else{surat2=null}
-            if(img3){
-            surat3 = {
-                img_name:img3.name,
-                img:await toBase64(img3)
-                } 
-            }else{surat3=null}  
-
-          let data={
-                surat4:surat1,
-                surat5:surat2,
-                surat6:surat3,
-            }
-            console.log("data:",data)
+        let formData = new FormData();
+        formData.append("surat4",img1);
+        formData.append("surat5",img2);
+        formData.append("surat6",img3);
+           
             console.log(img1,img2,img3)
-        axiosInstance.patch("/api/sargyt/update/admin/"+emaglumat.id,{
-                data
-        }).then((data)=>{
+        axiosInstance.patch("/api/sargyt/update/admin/"+emaglumat.id,formData).then((data)=>{
             console.log(data.data);
             message.success("successfully");
             getOrders();

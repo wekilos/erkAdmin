@@ -24,55 +24,44 @@ const Sargyt = ()=>{
     const [active,setActive] = useState(false);
 
     const SargytEt = async()=>{
-        const toBase64 = file => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = error => reject(error);
-            });
-            let surat1={};
-            let surat2={};
-            let surat3={};
-            if(img1){
-             surat1 = {
-                  img_name:img1.name,
-                  img:await toBase64(img1)
-                }
-            }else{surat1 = null}
-            if(img2){
-            surat2 = {
-                img_name:img2.name,
-                img:await toBase64(img2)
-                } 
-            }else{surat2=null}
-            if(img3){
-            surat3 = {
-                img_name:img3.name,
-                img:await toBase64(img3)
-                } 
-            }else{surat3=null}  
-
-            let ordered_date = new Date();
-          let data={
-                surat1:surat1,
-                surat2:surat2,
-                surat3:surat3,
-                yol:yol,
-                ugradyjy_ady:ugratyanAdy,
-                kabulediji_ady:kabuledijinAdy,
-                phoneNumber:phoneNumber,
-                product_name:productName,
-                guty_sany:guty,
-                kg:kg,
-                m3:m3,
-                total_price:baha,
-                // ordered_date:ordered_date,
-                // status_date:ordered_date,
-            }
-            console.log("data:",data)
-        axiosInstance.post("/api/sargyt/create/"+user.id,{
-                data
-        }).then((data)=>{
+       let formData = new FormData();
+       if(img1){
+        formData.append("surat1",img1)
+       }
+       if(img2){
+        formData.append("surat2",img2)
+       }
+       if(img3){
+        formData.append("surat3",img3)
+       }
+       if(yol){
+        formData.append("yol",yol)
+       }
+       if(ugratyanAdy){
+        formData.append("ugradyjy_ady",ugratyanAdy)
+       }
+       if(kabuledijinAdy){
+        formData.append("kabulediji_ady",kabuledijinAdy)
+       }
+       if(phoneNumber){
+        formData.append("phoneNumber",phoneNumber)
+       }
+       if(productName){
+        formData.append("product_name",productName)
+       }
+       if(guty){
+        formData.append("guty_sany",guty)
+       }
+       if(kg){
+        formData.append("kg",kg)
+       }
+       if(m3){
+        formData.append("m3",m3)
+       }
+       if(baha){
+        formData.append("total_price",baha)
+       }
+        axiosInstance.post("/api/sargyt/create/"+user.id,formData).then((data)=>{
             console.log(data.data);
             message.success("successfully");
             setYol();
