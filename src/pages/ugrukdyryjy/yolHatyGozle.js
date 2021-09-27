@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Input, Button } from "antd";
 import "antd/dist/antd.css";
 import {
@@ -8,8 +8,10 @@ import {
 } from "@ant-design/icons";
 
 import "./yolHatyGozle.css";
+import { ErkContext } from "../../context/Condex";
 
 const YolHatyGozle = (props) => {
+  const {dil} = useContext(ErkContext)
   const GoshButton = props.GoshButton;
   let sany=false;
 console.log(props.sany)
@@ -18,7 +20,7 @@ if(props.sany<=3){sany=true}else{sany=false}
     <div className="yolHaty-gozle">
       <form className="yolHaty-gozle--form">
         <div>
-        <h2 style={{margin:"10px 10px"}}>Admin Soraglar page</h2>
+        <h2 style={{margin:"10px 10px"}}>{dil=="tm"?"Soraglar sahypasy":"Страница вопросов"}</h2>
           {/* <Input
             className="yolHaty-gozle--input"
             placeholder="Id No"
@@ -38,7 +40,7 @@ if(props.sany<=3){sany=true}else{sany=false}
             icon={<PlusCircleFilled />}
             className="yolHaty-gozle--button"
           >
-            Sorag Döret
+           {dil=="tm"?" Sorag Döret":"Создать вопрос"}
           </Button>
         </div>
       </form>

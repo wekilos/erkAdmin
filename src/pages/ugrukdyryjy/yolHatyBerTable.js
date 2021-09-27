@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Table, Button, Space, Modal, Input, Checkbox, Drawer, Popconfirm, message } from "antd";
 import "antd/dist/antd.css";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -6,8 +6,10 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./yolHatyTable.css";
 import axios from "axios";
 import { axiosInstance,BASE_URL } from "../../utils/axiosIntance";
+import { ErkContext } from "../../context/Condex";
 
 const YolHatyTable = (props) => {
+  const {dil} = useContext(ErkContext)
   
 // geting all data from database with api
   const [data, setData] = props.data;
@@ -17,28 +19,33 @@ const YolHatyTable = (props) => {
 
   const columns = [
     {
-      title: "No",
+      title: (dil=="tm"?"No":"Но"),
       dataIndex: "id",
+      render:(text,record)=>(
+        <div style={{padding:"16px"}}>
+          {record.id}
+        </div>
+      )
     },
     {
-      title: "Ady",
+      title: (dil=="tm"?"Ady":"Имя"),
       dataIndex: "name_tm",
     },
     {
-      title: "Description",
+      title: (dil=="tm"?"Description":"Описание"),
       dataIndex: "description_tm",
     },
     {
-      title: "Sene tm",
+      title: (dil=="tm"?"Sene tm":"Дата"),
       dataIndex: "sene_tm",
     },
     {
-      title: "Details",
+      title: (dil=="tm"?"Details":"Подробности"),
       dataIndex: "details_tm",
     },
     
     {
-      title: "Goşmaça maglumat we Özgertmek",
+      title: (dil=="tm"?"Goşmaça maglumat we Özgertmek":"Дополнительная информация и редактирование"),
       dataIndex: "goshmacha",
       render: (text, record) => (
         <Space size="middle">
@@ -47,7 +54,7 @@ const YolHatyTable = (props) => {
             shape="round"
             onClick={() => ShowModal(record)}
           >
-            Goşmaça
+            {dil=="tm"?"Goşmaça":"Дополнительная инф"}
           </Button>
           <Button
             type="primary"
@@ -71,11 +78,11 @@ const YolHatyTable = (props) => {
              Kategoriýa Gosh 
           </Button> */}
           <Popconfirm
-            title="Are you sure to delete this task?"
+            title={dil=="tm"?"Siz çyndan öçürmek isleýärsinizmi?":"Вы действительно хотите удалить?"}
             onConfirm={() => DeleteMarket(record)}
             // onCancel={cancel}
-            okText="Howwa"
-            cancelText="Ýok"
+                        okText={dil=="tm"?"Howa":"да"}
+                        cancelText={dil=="tm"?"Ýok":"нет"}
           >
              <Button
               type="primary"
@@ -197,7 +204,7 @@ const YolHatyTable = (props) => {
       <Drawer
         width={500}
         className="lukman-table--drawer"
-        title="Goşmaça"
+        title={dil=="tm"?"Goşmaça":"Дополнительная информация"}
         placement="right"
         onClose={() => ShowModal()}
         visible={visible}
@@ -209,35 +216,35 @@ const YolHatyTable = (props) => {
               <td>{maglumat && maglumat.id} </td>
             </tr>
             <tr className="modalLi" key={maglumat && maglumat.name_tm}>
-              <td>ady tm </td>
+              <td>{dil=="tm"?"Ady tm":"Имя tm"} </td>
                {maglumat &&  maglumat.name_tm}
             </tr>
             <tr className="modalLi" key={maglumat && maglumat.name_ru}>
-              <td>ady ru </td>
+              <td>{dil=="tm"?"Ady ru":"Имя ru"} </td>
               <td>{maglumat && maglumat.name_ru}</td>
             </tr>
             <tr className="modalLi" key={maglumat && maglumat.description_tm}>
-              <td>Description tm </td>
+              <td>{dil=="tm"?"Düşündirilişi tm":"Описание tm"} </td>
               <td>{maglumat && maglumat.description_tm}</td>
             </tr>
             <tr className="modalLi" key={maglumat && maglumat.description_ru}>
-              <td>Description ru </td>
+              <td>{dil=="tm"?"Düşündirilişi ru":"Описание ru"} </td>
               <td>{maglumat && maglumat.description_ru}</td>
             </tr>
             <tr className="modalLi" key={maglumat && maglumat.sene_tm}>
-              <td>Sene tm </td>
+              <td>{dil=="tm"?"Sene tm":"Дата tm"} </td>
               <td>{maglumat && maglumat.sene_tm}</td>
             </tr>
             <tr className="modalLi" key={maglumat && maglumat.sene_ru}>
-              <td>Sene ru </td>
+              <td>{dil=="tm"?"Sene ru":"Дата ru"} </td>
               <td>{maglumat && maglumat.sene_ru}</td>
             </tr>
             <tr className="modalLi" key={maglumat && maglumat.details_tm}>
-              <td>Details tm </td>
+              <td>{dil=="tm"?"Giňişleýin tm":"Подробности tm"} </td>
               <td>{maglumat && maglumat.details_tm}</td>
             </tr>
             <tr className="modalLi" key={maglumat && maglumat.details_ru}>
-              <td>Details ru </td>
+              <td>{dil=="tm"?"Giňişleýin ru":"Подробности ru"} </td>
               <td>{maglumat && maglumat.details_ru}</td>
             </tr>
             
@@ -251,7 +258,7 @@ const YolHatyTable = (props) => {
       <Drawer
         width={500}
         className="lukman-table--drawer"
-        title="Üýtgetmeler"
+        title={dil=="tm"?"Üýtgetmeler":"Редактирование"}
         placement="right"
         onClose={() => ShowDrawer()}
         visible={edit}
@@ -265,7 +272,7 @@ const YolHatyTable = (props) => {
               type="primary"
               onClick={()=>ShowDrawer()}
             >
-              Goý bolsun
+              {dil=="tm"?"Goý bolsun":"Отмена"}
             </Button>
             <Button
               className="DrawerButton"
@@ -274,7 +281,7 @@ const YolHatyTable = (props) => {
               type="primary"
               onClick={()=>saveData(maglumat)}
             >
-              Üýtget <EditOutlined />
+              {dil=="tm"?"Üýtget":"Редактировать"} <EditOutlined />
             </Button>
           </div>
         }
@@ -283,7 +290,7 @@ const YolHatyTable = (props) => {
          
           <Input
             style={{ margin: "10px 0" }}
-            addonBefore="Name tm"
+            addonBefore={dil=="tm"?"Ady tm":"Имя tm"}
             className="suruji-uytget--input"
             type="text"
             name="name_tm"
@@ -292,7 +299,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ margin: "10px 0" }}
-            addonBefore="Name ru"
+            addonBefore={dil=="tm"?"Ady ru":"Имя ru"}
             className="suruji-uytget--input"
             name="name_ru"
             value={maglumat && maglumat.name_ru}
@@ -300,7 +307,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ margin: "10px 0" }}
-            addonBefore="Description tm"
+            addonBefore={dil=="tm"?"Düşündirilişi tm":"Описание tm"}
             className="suruji-uytget--input"
             name="description_tm"
             value={maglumat && maglumat.description_tm}
@@ -308,7 +315,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ margin: "10px 0" }}
-            addonBefore="Description ru"
+            addonBefore={dil=="tm"?"Düşündirilişi ru":"Описание ru"}
             className="suruji-uytget--input"
             name="description_ru"
             value={maglumat && maglumat.description_ru}
@@ -316,7 +323,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ margin: "10px 0" }}
-            addonBefore="Sene tm"
+            addonBefore={dil=="tm"?"Sene tm":"Дата tm"}
             className="suruji-uytget--input"
             name="sene_tm"
             value={maglumat && maglumat.sene_tm}
@@ -324,7 +331,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ margin: "10px 0" }}
-            addonBefore="Sene ru"
+            addonBefore={dil=="tm"?"Sene ru":"Дата ru"}
             className="suruji-uytget--input"
             name="sene_ru"
             value={maglumat && maglumat.sene_ru}
@@ -332,7 +339,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ margin: "10px 0" }}
-            addonBefore="Details tm"
+            addonBefore={dil=="tm"?"Giňişleýin tm":"Подробности tm"}
             className="suruji-uytget--input"
             name="details_tm"
             value={maglumat && maglumat.details_tm}
@@ -340,7 +347,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ margin: "10px 0" }}
-            addonBefore="Details ru"
+            addonBefore={dil=="tm"?"Giňişleýin ru":"Подробности ru"}
             className="suruji-uytget--input"
             name="details_ru"
             value={maglumat && maglumat.details_ru}

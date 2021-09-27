@@ -1,13 +1,15 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, useContext } from "react";
 
 import { Button, Input, message, Select } from "antd";
 import { useLocation } from "react-router";
 import upload from "../../img/upload.png"
 import "./sargyt.css";
 import { axiosInstance } from "../../utils/axiosIntance";
+import { ErkContext } from "../../context/Condex";
 const {Option} =Select;
 const Sargyt = ()=>{
 
+    const {dil} = useContext(ErkContext)
     const [user,setUser] = useState({});
     const [yol,setYol] = useState(null);
     const [ugratyanAdy,setUgratyanAdy] = useState();
@@ -101,46 +103,46 @@ const Sargyt = ()=>{
     return(
         <div className="sargyt-page">
             <div className="sargyt-form">
-                <div className="sargyt-etyan">Sargyt Etmek: <span> {user.name && user.name} {user.lastname && user.lastname}</span> <span>+{user.phoneNumber && user.phoneNumber}</span></div>
+                <div className="sargyt-etyan">{dil=="tm"?"Sargyt Etmek":"Сделать заказ"}: <span> {user.name && user.name} {user.lastname && user.lastname}</span> <span>+{user.phoneNumber && user.phoneNumber}</span></div>
                 <div className="form-inputs">
                     <Select
-                    placeholder='Ugur Saýlaň!'
+                    placeholder={dil=="tm"?'Ugur Saýlaň!':"Выбери путь!"}
                     onChange={(e)=>{setYol(e)}}
                     name='Ugur'  className='sargyt-select'>
-                        <Option value="1">Deňiz gatnawlary</Option>
-                        <Option value="2">Howa gatnawlary</Option>
-                        <Option value="3">Demirýol gatnawlary</Option>
-                        <Option value="4">Awtoulag gatnawlary</Option>
+                        <Option value="1">{dil=="tm"?"Deňiz gatnawlary":"Морские перевозки"}</Option>
+                        <Option value="2"> {dil=="tm"?"Howa gatnawlary":"Авиаперевозка"}</Option>
+                        <Option value="3"> {dil=="tm"?"Demirýol gatnawlary":"Ж-д перевозки"}</Option>
+                        <Option value="4"> {dil=="tm"?"Awtoulag gatnawlary":"Автоперевозка"}</Option>
                     </Select>
-                    <Input onChange={(e)=>setUgratyanAdy(e.target.value)} value={ugratyanAdy} addonBefore="Ugradyjynyň ady" className="form-input" />
-                    <Input onChange={(e)=>setKabuledijinAdy(e.target.value)} value={kabuledijinAdy} addonBefore="Kabuledijiň ady" className="form-input" />
-                    <Input onChange={(e)=>setPhoneNumber(e.target.value)} value={phoneNumber} addonBefore=" Telefon belgisi " className="form-input" />
-                    <Input onChange={(e)=>setProductName(e.target.value)} value={productName} addonBefore="Haryt Ady" className="form-input" />
-                    <Input onChange={(e)=>setGuty(e.target.value)} value={guty} addonBefore="Guty sany" className="form-input" />
-                    <Input onChange={(e)=>setKg(e.target.value)} value={kg} addonBefore=" KG " className="form-input" />
-                    <Input onChange={(e)=>setM3(e.target.value)} value={m3} addonBefore=" metrKub(m3) " className="form-input" />
-                    <Input onChange={(e)=>setBaha(e.target.value)} value={baha} addonBefore="Umumy baha" className="form-input" />
+                    <Input onChange={(e)=>setUgratyanAdy(e.target.value)} value={ugratyanAdy} addonBefore={dil=="tm"?"Haryt Ugratýan":"Отправитель товара"}  className="form-input" />
+                    <Input onChange={(e)=>setKabuledijinAdy(e.target.value)} value={kabuledijinAdy} addonBefore= {dil=="tm"?"Kabul ediji":"Получатель"} className="form-input" />
+                    <Input onChange={(e)=>setPhoneNumber(e.target.value)} value={phoneNumber} addonBefore= {dil=="tm"?"Telofon belgi":"Номер телефона"} className="form-input" />
+                    <Input onChange={(e)=>setProductName(e.target.value)} value={productName} addonBefore={dil=="tm"?"Haryt Ady":"Название товара"} className="form-input" />
+                    <Input onChange={(e)=>setGuty(e.target.value)} value={guty} addonBefore={dil=="tm"?"Guty sany":"Количество коробок"} className="form-input" />
+                    <Input onChange={(e)=>setKg(e.target.value)} value={kg} addonBefore={dil=="tm"?" KG ":"Кг"} className="form-input" />
+                    <Input onChange={(e)=>setM3(e.target.value)} value={m3} addonBefore={dil=="tm"?" metrKub(m3) ":"метрКуб (м3)"} className="form-input" />
+                    <Input onChange={(e)=>setBaha(e.target.value)} value={baha} addonBefore={dil=="tm"?"Umumy baha":"Итоговая цена"}className="form-input" />
                     <div className="upload-input">
-                        <Input onChange={(e)=>setImg1(e.target.files[0])} hidden id="file-upload-button1" type="file" addonBefore="Haryt Surat 1" className="form-input" />
+                        <Input onChange={(e)=>setImg1(e.target.files[0])} hidden id="file-upload-button1" type="file" addonBefore={dil=="tm"?"Haryt Surat 1":"Изображение груза 1"} className="form-input" />
                         <label for="file-upload-button1">
                             <img for="file-upload-button1" src={upload} alt="upload"/>
                         </label>
                     </div>
                     <div className="upload-input">
-                        <Input onChange={(e)=>setImg2(e.target.files[0])} hidden id="file-upload-button2" type="file" addonBefore="Haryt Surat 2" className="form-input" />
+                        <Input onChange={(e)=>setImg2(e.target.files[0])} hidden id="file-upload-button2" type="file" addonBefore={dil=="tm"?"Haryt Surat 2":"Изображение груза 2"} className="form-input" />
                         <label for="file-upload-button2">
                             <img for="file-upload-button2" src={upload} alt="upload"/>
                         </label>
                     </div>
                     <div className="upload-input">
-                        <Input onChange={(e)=>setImg3(e.target.files[0])} hidden id="file-upload-button3" type="file" addonBefore="Haryt Surat 3" className="form-input" />
+                        <Input onChange={(e)=>setImg3(e.target.files[0])} hidden id="file-upload-button3" type="file" addonBefore={dil=="tm"?"Haryt Surat 3":"Изображение груза 3"} className="form-input" />
                         <label for="file-upload-button3">
                             <img for="file-upload-button3" src={upload} alt="upload"/>
                         </label>
                     </div>
                     <div className="button">
-            { active &&  <Button  onClick={()=>SargytEt()} className="Button" type="primary" shape="round">Sargyt Et</Button>}                   
-            { active == false &&  <Button disabled  onClick={()=>SargytEt()} className="Button" type="primary" shape="round">Sargyt Et</Button>}                    </div>
+            { active &&  <Button  onClick={()=>SargytEt()} className="Button" type="primary" shape="round">{dil=="tm"?"Sargyt et":"Сделать заказ"}</Button>}                   
+            { active == false &&  <Button disabled  onClick={()=>SargytEt()} className="Button" type="primary" shape="round">{dil=="tm"?"Sargyt et":"Сделать заказ"}</Button>}                    </div>
 
                 </div>
             </div>

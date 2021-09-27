@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Table, Button, Space, Modal, Input, Checkbox, Drawer, Popconfirm, message } from "antd";
 import "antd/dist/antd.css";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -6,8 +6,10 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./yolHatyTable.css";
 import axios from "axios";
 import { axiosInstance,BASE_URL } from "../../utils/axiosIntance";
+import { ErkContext } from "../../context/Condex";
 
 const YolHatyTable = (props) => {
+  const {dil} = useContext(ErkContext)
   
 // geting all data from database with api
   const [data, setData] = props.data;
@@ -15,23 +17,28 @@ const YolHatyTable = (props) => {
 
   const columns = [
     {
-      title: "No",
+      title: (dil=="tm"?"No":"Но"),
       dataIndex: "id",
+      render:(teaxt,record)=>(
+        <div style={{padding:"16px"}}>
+          {record.id}
+        </div>
+      )
     },
     {
-      title: "Sorag Ady",
+      title: (dil=="tm"?"Sorag Ady":"Имя вопроса"),
       dataIndex: "name_tm",
     },
     {
-      title: "Sorag",
+      title: (dil=="tm"?"Sorag":"Вопрос"),
       dataIndex: "question_tm",
     },
     {
-      title: "Jogap",
+      title: (dil=="tm"?"Jogap":"Ответ"),
       dataIndex: "description_tm",
     },
     {
-      title: "Goşmaça maglumat we Özgertmek",
+      title: (dil=="tm"?"Goşmaça maglumat we Özgertmek":"Дополнительная информация и редактирование"),
       dataIndex: "goshmacha",
       render: (text, record) => (
         <Space size="middle">
@@ -40,7 +47,7 @@ const YolHatyTable = (props) => {
             shape="round"
             onClick={() => ShowModal(record)}
           >
-            Goşmaça
+            {dil=="tm"?"Goşmaça":"Дополнительная инф"}
           </Button>
           <Button
             type="primary"
@@ -50,12 +57,12 @@ const YolHatyTable = (props) => {
             <EditOutlined />
           </Button>
             <Popconfirm
-            title="Are you sure to delete this task?"
+            title={dil=="tm"?"Siz çyndan öçürmek isleýärsinizmi?":"Вы действительно хотите удалить?"}
             onConfirm={() => DeleteMarket(record.id)}
             // onCancel={cancel}
-            okText="Howwa"
-            cancelText="Ýok"
-          >
+            okText={dil=="tm"?"Howa":"да"}
+            cancelText={dil=="tm"?"Ýok":"нет"}
+            >
              <Button
               type="primary"
               shape="round"
@@ -154,7 +161,7 @@ const YolHatyTable = (props) => {
       <Drawer
         width={500}
         className="lukman-table--drawer"
-        title="Goşmaça"
+        title={dil=="tm"?"Goşmaça":"Дополнительная"}
         placement="right"
         onClose={() => ShowModal()}
         visible={visible}
@@ -166,27 +173,27 @@ const YolHatyTable = (props) => {
               <td>{maglumat && maglumat.id} </td>
             </tr>
             <tr style={{height:"35px"}} className="modalLi" key={maglumat && maglumat.name_tm}>
-              <td>Name_tm </td>
+              <td>{dil=="tm"?"Ady tm":"Имя tm"} </td>
               {maglumat && maglumat.name_tm}
             </tr>
             <tr style={{height:"35px"}} className="modalLi" key={maglumat && maglumat.name_ru}>
-              <td>Name_ru </td>
+              <td>{dil=="tm"?"Ady ru":"Имя ru"} </td>
               <td>{maglumat && maglumat.name_ru}</td>
             </tr>
             <tr style={{height:"35px"}} className="modalLi" key={maglumat && maglumat.question_tm}>
-              <td>Sorag_tm </td>
+              <td>{dil=="tm"?" Sorag tm ":"Вопрос tm"} </td>
               {maglumat && maglumat.question_tm}
             </tr>
             <tr style={{height:"35px"}} className="modalLi" key={maglumat && maglumat.question_ru}>
-              <td>Sorag_ru </td>
+              <td>{dil=="tm"?" Sorag ru ":"Вопрос ru"} </td>
               <td>{maglumat && maglumat.question_ru}</td>
             </tr>
             <tr style={{height:"35px"}} className="modalLi" key={maglumat && maglumat.description_tm}>
-              <td>Jogap_tm </td>
+              <td>{dil=="tm"?"Jogap tm":"Ответ tm"} </td>
               {maglumat && maglumat.description_tm}
             </tr>
             <tr style={{height:"35px"}} className="modalLi" key={maglumat && maglumat.description_ru}>
-              <td>Jogap_ru </td>
+              <td>{dil=="tm"?"Jogap ru":"Ответ ru"} </td>
               <td>{maglumat && maglumat.description_ru}</td>
             </tr>
             
@@ -199,7 +206,7 @@ const YolHatyTable = (props) => {
       <Drawer
         width={500}
         className="lukman-table--drawer"
-        title="Üýtgetmeler"
+        title={dil=="tm"?"Üýtgetmeler":"Редактирование"}
         placement="right"
         onClose={() => ShowDrawer()}
         visible={edit}
@@ -209,7 +216,7 @@ const YolHatyTable = (props) => {
          
           <Input
             style={{ marginTop: "10px" }}
-            addonBefore="Ady tm"
+            addonBefore={dil=="tm"?"Ady tm":"Имя tm"}
             className="Sorag-Input"
             type="text"
             name="name_tm"
@@ -218,7 +225,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ marginTop: "10px" }}
-            addonBefore="Ady ru"
+            addonBefore={dil=="tm"?"Ady ru":"Имя ru"}
             className="Sorag-Input"
             name="name_ru"
             value={name_ru}
@@ -226,7 +233,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ marginTop: "10px" }}
-            addonBefore="Sorag tm"
+            addonBefore={dil=="tm"?" Sorag tm ":"Вопрос tm"}
             className="Sorag-Input"
             name="question_tm"
             value={question_tm}
@@ -234,7 +241,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ marginTop: "10px" }}
-            addonBefore="Sorag ru"
+            addonBefore={dil=="tm"?" Sorag ru ":"Вопрос ru"}
             name="question_ru"
             className="Sorag-Input"
             value={question_ru}
@@ -243,7 +250,7 @@ const YolHatyTable = (props) => {
          
           <Input
             style={{ marginTop: "10px" }}
-            addonBefore="Jogap tm"
+            addonBefore={dil=="tm"?"Jogap tm":"Ответ tm"}
             name="description_tm"
             className="Sorag-Input"
             value={description_tm}
@@ -251,7 +258,7 @@ const YolHatyTable = (props) => {
           />
           <Input
             style={{ marginTop: "10px" }}
-            addonBefore="Jogap ru "
+            addonBefore={dil=="tm"?"Jogap ru":"Ответ ru"}
             name="description_ru"
             className="Sorag-Input"
             value={description_ru}
@@ -267,7 +274,7 @@ const YolHatyTable = (props) => {
               type="primary"
               onClick={()=>ShowDrawer()}
             >
-              Goý bolsun
+              {dil=="tm"?"Goý bolsun":"Отмена"}
             </Button>
             <Button
               style={{width:"35%"}}
@@ -276,7 +283,7 @@ const YolHatyTable = (props) => {
               type="primary"
               onClick={()=>saveData(maglumat)}
             >
-              Üýtget <EditOutlined />
+              {dil=="tm"?"Üýtget":"Редактировать"} <EditOutlined />
             </Button>
           </div>
       </Drawer>

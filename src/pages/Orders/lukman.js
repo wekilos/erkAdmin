@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 
 import {Button,Input,Drawer,Select} from 'antd';
 import "antd/dist/antd.css";
@@ -9,11 +9,13 @@ import UnitGosh from './UnitGosh';
 import LukmanTable from './LukmanTable';
 import  './lukman.css';
 import { axiosInstance } from '../../utils/axiosIntance';
+import { ErkContext } from '../../context/Condex';
 const {Option} = Select;
 
 const Lukman = () =>{
 
-    const [units,setUnits] = useState([]);
+        const {dil} = useContext(ErkContext)
+        const [units,setUnits] = useState([]);
             const [ statuses,setStatuses] = useState([]);
             const [ statusId, setStatusId] = useState(null);
             const [ all, setAll ] = useState(null);
@@ -90,25 +92,25 @@ const Lukman = () =>{
              <div className='lukman-gozleg'>
             <form className='lukman-gozleg--form'>
                 <div>
-                <Input onChange={(e)=>{setAll(e.target.value)}} placeholder = 'Umumy Gözleg' className='lukman-gozleg--input' />
+                <Input onChange={(e)=>{setAll(e.target.value)}} placeholder = {dil=="tm"?'Umumy Gözleg':"Общий поиск"} className='lukman-gozleg--input' />
                 <Select
                     className='lukman-gozleg--input'
                     showSearch
                     // style={{ width: 200 }}
-                    placeholder="Zakaz Status Saýla"
+                    placeholder={dil=="tm"?"Sargyt Status Saýla":"Выбрать статус заказа"}
                     optionFilterProp="children"
                     onChange={(value)=>setStatusId(value)}
                     filterOption={(input, option) =>
                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                     }
                 >
-                    <Option value={null}>Ählisi</Option>
-                    <Option value="1" >Gelmegine garaşylýar</Option>
-                    <Option value="2" >Ammara geldi</Option>
-                    <Option value="3" >Ýüküňiz ugradyldy!</Option>
-                    <Option value="4" >Ýolda</Option>
-                    <Option value="5" >Türkmenistanyň ammaryna geldi</Option>
-                    <Option value="6" >Gowşurma nokadyna ugradyldy</Option>
+                    <Option value={null}>{dil=="tm"?"Ählisi":"Все"}</Option>
+                    <Option value="1" >{dil=="tm"?"Gelmegine garaşylýar":"Ожидается к прибытью"}</Option>
+                    <Option value="2" >{dil=="tm"?"Ammara geldi":"Груз прибыл на склад"}</Option>
+                    <Option value="3" >{dil=="tm"?"Ýüküňiz ugradyldy":"Груз отправлен"}</Option>
+                    <Option value="4" >{dil=="tm"?"Ýolda":"В пути"}</Option>
+                    <Option value="5" >{dil=="tm"?"Türkmenistanyň gümrügine geldi":"Прибыл на таможню Туркменистана"}</Option>
+                    <Option value="6" >{dil=="tm"?"Gowşurma nokadyna ugradyldy":"Отправлен в пункт доставки"}</Option>
                             
                 </Select>
                 {/* <Input addonBefore='Sene' type='date' className='lukman-gozleg--input' /> */}

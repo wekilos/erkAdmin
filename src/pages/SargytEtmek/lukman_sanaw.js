@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 
 import {Button,Input,Drawer,Select} from 'antd';
 import "antd/dist/antd.css";
@@ -9,9 +9,11 @@ import StatusGosh from './StatusGosh';
 import LukmanSanawTable from './LukmanSanawTable';
 import  './lukman.css';
 import { axiosInstance } from '../../utils/axiosIntance';
+import { ErkContext } from '../../context/Condex';
 const {Option} = Select;
 const Lukman = () =>{
 
+    const {dil} = useContext(ErkContext)
     const [ data, setData ] = useState([]);
     const [ number,setNumber] = useState(null);
     const [all,setAll ] = useState(null);
@@ -76,19 +78,19 @@ const Lukman = () =>{
              <div className='lukman-gozleg'>
             <form className='lukman-gozleg--form'>
                 <div>
-                <Input style={{width:"300px",marginRight:"10px"}} addonBefore='Umumy' value={all} onChange={(e)=>setAll(e.target.value)}/>
-                <Input style={{width:"300px",marginRight:"10px"}}  addonBefore='Phone Number' value={number} onChange={(e)=>setNumber(e.target.value)}/>
+                <Input style={{width:"300px",marginRight:"10px"}} addonBefore={dil=="tm"?'Umumy':"Общий"} value={all} onChange={(e)=>setAll(e.target.value)}/>
+                <Input style={{width:"300px",marginRight:"10px"}}  addonBefore={dil=="tm"?'Telefon Belgi':"Номер телефона"} value={number} onChange={(e)=>setNumber(e.target.value)}/>
                 <Select
                     style={{width:"250px",marginRight:"10px"}} 
-                    placeholder='Status Saýlaň!'
+                    placeholder={dil=="tm"?'Status saýlaň!':"Выбрать cтатус!"}
                     showSearch
                  element='select'
                  label="Status"
                  defaultOption='Statusy saýlaň!' name='status'  className='ulanyjy-gozle--input' value={select} onChange={(e)=>{setSelect(e)}}
                 >
-                    <Option value={null}>Ählisi</Option>
-                    <Option value="1">User</Option>
-                    <Option value="2">Admin</Option>
+                    <Option value={null}>{dil=="tm"?"Ählisi":"Все "}</Option>
+                    <Option value="1">{dil=="tm"?"Ulanyjy":"Пользователь"}</Option>
+                    <Option value="2">{dil=="tm"?"Admin":"Админ"}</Option>
                   
 
                </Select>

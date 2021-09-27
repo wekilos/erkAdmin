@@ -20,7 +20,7 @@ const App = () => {
   return (
     <BrowserRouter history={history}>
       <ScrollIntoView>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Loading  />}>
           <Switch>
             <PublicRoute
               restricted={true}

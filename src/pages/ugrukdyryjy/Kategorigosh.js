@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Input, Steps, Button, message, Upload } from "antd";
 import "antd/dist/antd.css";
@@ -7,6 +7,7 @@ import { axiosInstance } from "../../utils/axiosIntance";
 import "./yolHatyGosh.css";
 import axios from "axios";
 import fetch from "node-fetch";
+import { ErkContext } from "../../context/Condex";
 
 
 const YolHatyGosh = (props) => {
@@ -50,6 +51,7 @@ let getData = props.getData;
     })
   }
     
+  const {dil} = useContext(ErkContext);
 
   return (
     <div className="yolHaty-gosh">
@@ -61,7 +63,7 @@ let getData = props.getData;
                 <div className="yolHatyTable--uytgetmeler" style={{width:"100%",justifyContent:"center"}}>
                 <Input
                     style={{margin:"10px 0px"}}
-                    addonBefore="Ady tm"
+                    addonBefore={dil=="tm"?"Ady tm":"Имя tm"}
                     className="suruji-uytget--input"
                     name="name_tm"
                     value={name_tm}
@@ -69,49 +71,49 @@ let getData = props.getData;
                     />
                     <Input
                     style={{margin:"10px 0px"}}
-                    addonBefore="Ady ru"
+                    addonBefore={dil=="tm"?"Ady ru":"Имя ru"}
                     className="suruji-uytget--input"
                     value={name_ru}
                     onChange={(e)=>setName_ru(e.target.value)}
                     />
                     <Input
                     style={{margin:"10px 0px"}}
-                    addonBefore="Description tm"
+                    addonBefore={dil=="tm"?"Düşündirilişi tm":"Описание tm"}
                     className="suruji-uytget--input"
                     value={description_tm}
                     onChange={(e)=>setDescription_tm(e.target.value)}
                     />
                     <Input
                     style={{margin:"10px 0px"}}
-                    addonBefore="Description ru"
+                    addonBefore={dil=="tm"?"Düşündirilişi ru":"Описание ru"}
                     className="suruji-uytget--input"
                     value={description_ru}
                     onChange={(e)=>setDescription_ru(e.target.value)}
                     />
                     <Input
                     style={{margin:"10px 0px"}}
-                    addonBefore="Sene tm"
+                    addonBefore={dil=="tm"?"Sene tm":"Дата tm"}
                     className="suruji-uytget--input"
                     value={sene_tm}
                     onChange={(e)=>setSene_tm(e.target.value)}
                     />
                     <Input
                     style={{margin:"10px 0px"}}
-                    addonBefore="Sene ru"
+                    addonBefore={dil=="tm"?"Sene ru":"Дата ru"}
                     className="suruji-uytget--input"
                     value={sene_ru}
                     onChange={(e)=>setSene_ru(e.target.value)}
                     />
                     <Input
                     style={{margin:"10px 0px"}}
-                    addonBefore="Details tm"
+                    addonBefore={dil=="tm"?"Giňişleýin tm":"Подробности tm"}
                     className="suruji-uytget--input"
                     value={details_tm}
                     onChange={(e)=>setDetails_tm(e.target.value)}
                     />
                     <Input
                     style={{margin:"10px 0px"}}
-                    addonBefore="Details ru"
+                    addonBefore={dil=="tm"?"Giňişleýin ru":"Подробности ru"}
                     className="suruji-uytget--input"
                     value={details_ru}
                     onChange={(e)=>setDetails_ru(e.target.value)}
@@ -122,7 +124,7 @@ let getData = props.getData;
                     shape="round"
                     onClick={()=>ShertGosh()}
                     >
-                    Gosh
+                    {dil=="tm"?"Gosh":"Добавлять"}
                     </Button>
                 </div>
             </div>

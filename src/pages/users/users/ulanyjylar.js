@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, useContext} from 'react';
 import { Button,Input,Drawer,Select, message } from 'antd';
 import "antd/dist/antd.css";
 import { PlusCircleFilled,MailOutlined,MailFilled } from '@ant-design/icons';
@@ -9,10 +9,13 @@ import UlanyjyTable from './ulanyjyTable';
 import UlanyjyGosh from './ulanyjyGosh';
 import './ulanyjylar.css';
 import { BASE_URL,axiosInstance } from '../../../utils/axiosIntance';
+import { ErkContext } from '../../../context/Condex';
 
 const Option = {Select};
 const {TextArea} = Input;
 const Ulanyjylar =(props)=>{
+
+    const {dil} = useContext(ErkContext)
     const [Gosh,setGosh]=useState(false);
     const [mail,setMail] = useState(false);
 
@@ -126,7 +129,7 @@ const Ulanyjylar =(props)=>{
             <Drawer
                 width={400}
                 className='lukman-table--drawer'
-                title="Ulanyjy Goş"
+                title={dil=="tm"?"Ulanyjy Goş":"Добавить пользователя"}
                 placement="right"
                 closable={true}
                 mask={true}
@@ -140,17 +143,17 @@ const Ulanyjylar =(props)=>{
             <Drawer
                 width={500}
                 className='ulanyjylar-table--drawer'
-                title="Mail ugrat"
+                title={dil=="tm"?"Mail ugrat":"Отправить письмо"}
                 placement="right"
                 onClose={()=>OpenMail()}
                 visible={mail}>
             
               <React.Fragment>
-                  <h2>Siz Ähli ulanyjylara ugratýarsyňyz!</h2>
+                  <h2>{dil=="tm"?"Siz Ähli ulanyjylara ugratýarsyňyz!":"Вы отправляете его всем пользователям!"}</h2>
            <div>
-             <Input addonBefore="Subject" style={{margin:"20px 0"}} 
+             <Input addonBefore={dil=="tm"?"Tema":"Тема"} style={{margin:"20px 0"}} 
              value={subject} onChange={(e)=>setSubject(e.target.value)} />
-             <label style={{fontSize:"16px",marginTop:"20px"}} for="text" > Text </label>
+             <label style={{fontSize:"16px",marginTop:"20px"}} for="text" > {dil=="tm"?"Tekst":"Текст"} </label>
              <TextArea id="text" rows={8}
              value={text} onChange={(e)=>setText(e.target.value)}
              />
@@ -160,7 +163,7 @@ const Ulanyjylar =(props)=>{
              shape="round"
              style={{width:"50%",margin:"20px 25%"}}
              onClick={()=>SentMailtoAllUser()}
-             >Mail Ugrat</Button>
+             >{dil=="tm"?"Mail ugrat":"Отправить письмо"}</Button>
            </div>
            </React.Fragment>
             
@@ -169,24 +172,24 @@ const Ulanyjylar =(props)=>{
             <div className='ulanyjy-gozle'>
             <form className='ulanyjy-gozle--form'>
                 <div>
-                <Input className='ulanyjy-gozle--input' addonBefore='Umumy' value={all} onChange={(e)=>setAll(e.target.value)}/>
-                <Input className='ulanyjy-gozle--input' addonBefore='Phone Number' value={number} onChange={(e)=>setNumber(e.target.value)}/>
+                <Input className='ulanyjy-gozle--input' addonBefore={dil=="tm"?'Umumy':"Общий"} value={all} onChange={(e)=>setAll(e.target.value)}/>
+                <Input className='ulanyjy-gozle--input' addonBefore={dil=="tm"?'Telefon belgi':"Номер телефона"} value={number} onChange={(e)=>setNumber(e.target.value)}/>
                 <Select
-                    placeholder='Status Saýlaň!'
+                    placeholder={dil=="tm"?'Status Saýlaň!':"Выбрать Статус!"}
                     showSearch
                  element='select'
                  label="Status"
                  defaultOption='Statusy saýlaň!' name='status'  className='ulanyjy-gozle--input' value={select} onChange={(e)=>{setSelect(e)}}
                 >
-                    <Option value={null}>Ählisi</Option>
-                    <Option value="1">User</Option>
-                    <Option value="2">Admin</Option>
+                    <Option value={null}>{dil=="tm"?"Ählisi":"Все"}</Option>
+                    <Option value="1">{dil=="tm"?"Ulanyjy":"Пользователь"}</Option>
+                    <Option value="2">{dil=="tm"?"Admin":"Админ"}</Option>
                   
 
                </Select>
                </div>
-               <Button onClick={OpenMail} shape='round' type='primary' icon={<MailFilled />} className='ulanyjy-gozle--button'> Mail</Button>
-               <Button onClick={GoshButton} shape='round' type='primary' icon={<PlusCircleFilled />} className='ulanyjy-gozle--button'> User</Button>
+               <Button onClick={OpenMail} shape='round' type='primary' icon={<MailFilled />} className='ulanyjy-gozle--button'> {dil=="tm"?'Mail':"Почта"}</Button>
+               <Button onClick={GoshButton} shape='round' type='primary' icon={<PlusCircleFilled />} className='ulanyjy-gozle--button'> {dil=="tm"?"Ulanyjy":"Пользователь"}</Button>
 
             </form>
         </div>

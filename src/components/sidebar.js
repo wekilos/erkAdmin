@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./sidebar.css";
 import { logout } from "../utils";
 // import logo_ from "../../img/logo_.svg";
@@ -18,22 +18,20 @@ import {
   AlignLeftOutlined,
   FileTextOutlined
 } from "@ant-design/icons";
+import { useState } from "react/cjs/react.development";
+import { ErkContext } from "../context/Condex";
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-export default class SiderDemo extends React.Component {
-  state = {
-    collapsed: false,
+const   SiderDemo =()=> {
+  const [collapsed,setCollapsed] = useState(false)
+  
+const {dil} = useContext(ErkContext)
+const  toggle = () => {
+    setCollapsed(!collapsed);
   };
 
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
-  };
-
-  render() {
     return (
       // <div>
       <Sider
@@ -48,7 +46,7 @@ export default class SiderDemo extends React.Component {
         width={220}
         trigger={null}
         collapsible
-        collapsed={this.state.collapsed}
+        collapsed={collapsed}
       >
         {/* <div
           className="toggle"
@@ -63,7 +61,7 @@ export default class SiderDemo extends React.Component {
           )}
         </div> */}
         <div align="center">
-          {this.state.collapsed ? (
+          { collapsed ? (
             <Tooltip color="green" placement="right" title="Open">
               {/* <img
                 onClick={this.toggle}
@@ -71,13 +69,13 @@ export default class SiderDemo extends React.Component {
                 src={logo}
                 alt="logo"
               /> */}
-              <div onClick={this.toggle} className="logo">
+              <div onClick={toggle} className="logo">
                 Erk
               </div>
             </Tooltip>
           ) : (
             <Tooltip color="green" placement="right" title="Close">
-              <div onClick={this.toggle} className="logo">
+              <div onClick={toggle} className="logo">
                 Erk Trading
               </div>
             </Tooltip>
@@ -95,21 +93,21 @@ export default class SiderDemo extends React.Component {
             title={
               <span>
                 <DashboardOutlined />
-                <span className="menuitem ">Sargytlar</span>
+                <span className="menuitem ">{dil=="tm"?"Sargytlar":"Заказы"}</span>
               </span>
             }
           >
             <Menu.Item className="menuitem menuitem2" key="1">
-              <Link to="orders">Sargytlar</Link>
+              <Link to="orders">{dil=="tm"?"Sargytlar":"Заказы"}</Link>
             </Menu.Item>
             {/* <Menu.Item className="menuitem menuitem2" key="2">
               <Link to="orderStatus">Sargydyň Statusy</Link>
             </Menu.Item> */}
             <Menu.Item className="menuitem menuitem2" key="3">
-              <Link to="archiveOrders">Gowşurlan Sargytlar</Link>
+              <Link to="archiveOrders">{dil=="tm"?"Gowşurlan Sargytlar":"Доставленные заказы"}</Link>
             </Menu.Item>
             <Menu.Item className="menuitem menuitem2" key="63">
-              <Link to="canceledOrders">Ýatyrylan Sargytlar</Link>
+              <Link to="canceledOrders">{dil=="tm"?"Ýatyrylan Sargytlar":"Отмененные заказы"}</Link>
             </Menu.Item>
           </SubMenu>
 
@@ -118,18 +116,18 @@ export default class SiderDemo extends React.Component {
             title={
               <span className="menuitem">
                 <SearchOutlined />
-                <span>Haryt Gözleg</span>
+                <span>{dil=="tm"?"Haryt Gözlegi":"Поиск товаров"}</span>
               </span>
             }
           >
             <Menu.Item className="menuitem menuitem2" key="5">
-            <Link to="gozleg">Gözlegdäkiler</Link>
+            <Link to="gozleg">{dil=="tm"?"Gözlegdäkiler":"В поиске"}</Link>
             </Menu.Item>
             <Menu.Item className="menuitem menuitem2" key="65">
-            <Link to="tapylan">Tapylanlar</Link>
+            <Link to="tapylan">{dil=="tm"?"Tapylanlar":"Найденные"}</Link>
             </Menu.Item>
             <Menu.Item className="menuitem menuitem2" key="4">
-            <Link to="tapylmadyk">Tapylmadyklar</Link>
+            <Link to="tapylmadyk">{dil=="tm"?"Tapylmadyklar":"Не найденные"}</Link>
             </Menu.Item>            
           </SubMenu>
           <SubMenu
@@ -137,12 +135,12 @@ export default class SiderDemo extends React.Component {
             title={
               <span className="menuitem">
                 <FormOutlined />
-                <span>Sargyt et</span>
+                <span>{dil=="tm"?"Sargyt et":"Сделать заказ"}</span>
               </span>
             }
           >
             <Menu.Item className="menuitem menuitem2" key="6">
-              <Link to="/sargytEt" >Sargyt et</Link>
+              <Link to="/sargytEt" >{dil=="tm"?"Sargyt et":"Сделать заказ"}</Link>
             </Menu.Item>
             {/* <Menu.Item className="menuitem menuitem2" key="7">
                <Link to="/busses">Awtobuslar</Link>
@@ -153,15 +151,15 @@ export default class SiderDemo extends React.Component {
             title={
               <span className="menuitem">
                 <FileTextOutlined />
-                <span>Maglumatlar</span>
+                <span>{dil=="tm"?"Maglumatlar":"Информации"}</span>
               </span>
             }
           >
             <Menu.Item className="menuitem menuitem2" key="17">
-            <Link to="soraglar">Soraglar</Link>
+            <Link to="soraglar">{dil=="tm"?"Soraglar":"Вопросы"}</Link>
             </Menu.Item>
             <Menu.Item className="menuitem menuitem2" key="18">
-            <Link to="shertler">Shertler</Link>
+            <Link to="shertler">{dil=="tm"?"Shertler":"Условии"}</Link>
             </Menu.Item>
           </SubMenu>
           
@@ -190,7 +188,7 @@ export default class SiderDemo extends React.Component {
             title={
               <span className="menuitem">
                <AlignLeftOutlined />
-                <span>Config</span>
+                <span>{dil=="tm"?"Aragatnaşyk":"Контакты"}</span>
               </span>
             }
           >
@@ -198,7 +196,7 @@ export default class SiderDemo extends React.Component {
             <Link to="posts">Posts</Link>
             </Menu.Item> */}
             <Menu.Item className="menuitem menuitem2" key="20">
-            <Link to="config">Config</Link>
+            <Link to="config">{dil=="tm"?"Aragatnaşyk":"Контакты"}</Link>
             </Menu.Item>
             {/* <Menu.Item className="menuitem menuitem2" key="21">
             <Link to="#garaz_sanaw">Currency</Link>
@@ -241,7 +239,7 @@ export default class SiderDemo extends React.Component {
             title={
               <span>
                 <SettingOutlined />
-                <span className="menuitem">Sazlamalar</span>
+                <span className="menuitem">{dil=="tm"?"Sazlamalar":"Настройки"}</span>
               </span>
             }
           >
@@ -249,7 +247,7 @@ export default class SiderDemo extends React.Component {
               Genral
             </Menu.Item> */}
             <Menu.Item className="menuitem menuitem2" key="13">
-              <Link to="/users">Users</Link>
+              <Link to="/users">{dil=="tm"?"Ulanyjylar":"Пользователи"}</Link>
             </Menu.Item>
             {/* <Menu.Item className="menuitem menuitem2" key="14">
               <Link to="/drivers">Sürüjiler</Link>
@@ -271,10 +269,11 @@ export default class SiderDemo extends React.Component {
         <div className="admin-footer">
           <center style={{ fontSize: 12, color: "#C0C0C0", fontWeight: 600 }}>
             Developed by:
-            <br /> Hebent programmer team
+            <br /> Sanly Garaýyş programmer team
           </center>
         </div>
       </Sider>
     );
   }
-}
+
+export default  SiderDemo

@@ -1,11 +1,14 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, useContext} from 'react';
 import {Input,Button,Select} from 'antd'
 import "antd/dist/antd.css";
 import { PlusCircleFilled,CloseCircleOutlined,SearchOutlined } from '@ant-design/icons';
 
 import './ulanyjyGozle.css';
+import { ErkContext } from '../../../context/Condex';
 
 const UlanyjyGozle = (props)=>{
+
+    const {dil} = useContext(ErkContext)
     const GoshButton=props.GoshButton;
     const {Option}=Select;
     const [select,setSelect]=useState(null);

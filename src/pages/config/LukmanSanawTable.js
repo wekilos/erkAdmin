@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useContext, useState} from 'react';
 
 import {Button,Space,message,Table,Input,Drawer,Popconfirm} from 'antd';
 import "antd/dist/antd.css";
@@ -7,39 +7,46 @@ import { EditOutlined,DeleteOutlined,PlusCircleFilled } from '@ant-design/icons'
 import StatusEdit from './SurujiYagdayy';
 import './LukmanTable.css';
 import { axiosInstance, BASE_URL } from '../../utils/axiosIntance';
+import { ErkContext } from '../../context/Condex';
 
 const LukmanTable = props=>{
+    const{dil} = useContext(ErkContext)
 
     const [data,setData]=props.data;
     const getConfig = props.getConfig;
     
     const columns = [
         {
-            title:"Config No",
-            dataIndex:"id"
+            title:"ID",
+            dataIndex:"id",
+            render:(text,record)=>(
+                <div style={{padding:"16px"}}>
+                    {record.id}
+                </div>
+            )
         },
         {
-            title:"Phone Number",
+            title:(dil=="tm"?'Telefon belgi':"Номер телефона"),
             dataIndex:"phoneNumber",
             
         },
         {
-            title:"Mail",
+            title:(dil=="tm"?'Mail':"Почта"),
             dataIndex:"mail",
             
         },
         {
-            title:"Üýtgetmek we Özgertmek",
+            title:(dil=="tm"?"Goşmaça maglumat we Özgertmek":"Дополнительная информация и редактирование"),
             dataIndex:"goshmacha",
             render: (text, record) => (
                 <Space size="middle">
                     <Button type='primary'shape='round'onClick={()=>ShowDrawer(record)} ><EditOutlined /></Button>
                     <Popconfirm
-                        title="Siz çyndan öçürmek isleýärsinizmi?"
+                        title={dil=="tm"?"Siz çyndan öçürmek isleýärsinizmi?":"Вы действительно хотите удалить?"}
                         onConfirm={()=>DeleteUser(record)} 
                         // onCancel={cancel}
-                        okText="Howwa"
-                        cancelText="Ýok"
+                        okText={dil=="tm"?"Howa":"да"}
+                        cancelText={dil=="tm"?"Ýok":"нет"}
                     >
                         <Button type='primary' shape='round' danger  ><DeleteOutlined /></Button>                 
                
@@ -111,15 +118,15 @@ const EditConfig = (id)=>{
                 <Drawer
                 width={500}
                 className='lukman-table--drawer'
-                title="Üýtgetmeler"
+                title={dil=="tm"?"Üýtgetmeler":"Редактирование"}
                 placement="right"
                 onClose={()=>ShowDrawer()}
                 visible={edit}>
-                    <Input style={{width:"90%"}} value={phoneNumber} onChange={(e)=>{setPhoneNumber(e.target.value)}} addonBefore='Phone Number'  className='suruji-yagdayy--input' />
-                    <Input style={{width:"90%"}} value={mail} onChange={(e)=>{setMail(e.target.value)}} addonBefore='Mail'  className='suruji-yagdayy--input' />
+                    <Input style={{width:"90%"}} value={phoneNumber} onChange={(e)=>{setPhoneNumber(e.target.value)}} addonBefore={dil=="tm"?'Telefon belgi':"Номер телефона"}  className='suruji-yagdayy--input' />
+                    <Input style={{width:"90%"}} value={mail} onChange={(e)=>{setMail(e.target.value)}} addonBefore={dil=="tm"?'Mail':"Почта"}  className='suruji-yagdayy--input' />
                 
-                    <Button style={{width:"40%"}} onClick={()=>EditConfig(config_id)} icon={<PlusCircleFilled/>} shape='round' type='primary' className='suruji-yagdayy--button'>üýtget</Button>
-                    <Button style={{width:"40%"}} onClick={()=>ShowDrawer()} shape='round' danger type='primary' className='suruji-yagdayy--button'>Goýbolsyn</Button>
+                    <Button style={{width:"40%"}} onClick={()=>EditConfig(config_id)} icon={<PlusCircleFilled/>} shape='round' type='primary' className='suruji-yagdayy--button'>{dil=="tm"?"Döret":"Создать"}</Button>
+                    <Button style={{width:"40%"}} onClick={()=>ShowDrawer()} shape='round' danger type='primary' className='suruji-yagdayy--button'>{dil=="tm"?"Goý bolsun":"Отмена"}</Button>
             
                 </Drawer>
                 <Table columns={columns} dataSource={data} />

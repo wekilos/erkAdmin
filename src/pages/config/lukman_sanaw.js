@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 
 import {Button,Input,Drawer} from 'antd';
 import "antd/dist/antd.css";
@@ -9,8 +9,11 @@ import StatusGosh from './StatusGosh';
 import LukmanSanawTable from './LukmanSanawTable';
 import  './lukman.css';
 import { axiosInstance } from '../../utils/axiosIntance';
+import { ErkContext } from '../../context/Condex';
 
 const Lukman = () =>{
+
+    const {dil} = useContext(ErkContext)
 
     const [ data, setData ] = useState([]);
 
@@ -50,7 +53,7 @@ const Lukman = () =>{
             <Drawer
             width={500}
             className='lukman-gosh--drawer'
-            title="Status Goş"
+            title={dil=="tm"?"Kontakt Goş":"Добавить контакт"}
             placement="right"
             onClose={()=>Close()}
             visible={state}

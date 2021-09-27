@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 
 import {Button,Input,Drawer,Select} from 'antd';
 import "antd/dist/antd.css";
@@ -9,10 +9,12 @@ import UnitGosh from './UnitGosh';
 import LukmanTable from './tapylmadyklarTable';
 import  './lukman.css';
 import { axiosInstance } from '../../utils/axiosIntance';
+import { ErkContext } from '../../context/Condex';
 const {Option} = Select;
 
 const Lukman = () =>{
 
+    const {dil} = useContext(ErkContext)
     const [units,setUnits] = useState([]);
             const [ statuses,setStatuses] = useState([]);
             const [ statusId, setStatusId] = useState(null);
@@ -90,7 +92,7 @@ const Lukman = () =>{
              <div className='lukman-gozleg'>
             <form className='lukman-gozleg--form'>
                 <div>
-                <Input onChange={(e)=>{setAll(e.target.value)}} placeholder = 'Umumy Gözleg' className='lukman-gozleg--input' />
+                <Input onChange={(e)=>{setAll(e.target.value)}} placeholder = {dil=="tm"?'Umumy Gözleg':"Общий поиск"} className='lukman-gozleg--input' />
                 {/* <Select
                     className='lukman-gozleg--input'
                     showSearch

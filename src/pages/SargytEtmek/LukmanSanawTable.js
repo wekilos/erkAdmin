@@ -1,14 +1,17 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, useContext} from 'react';
 import {Table,Button,Space,Modal,Input, Drawer,Tabs,Select, message ,Popconfirm} from 'antd';
 import "antd/dist/antd.css";
 import { EditOutlined,DeleteOutlined,PlusCircleFilled } from '@ant-design/icons';
 import { useHistory } from 'react-router';
 import './ulanyjyTable.css';
 import { axiosInstance } from '../../utils/axiosIntance';
+import { ErkContext } from '../../context/Condex';
 
 const { TabPane } =Tabs;
 const {Option}=Select;
 const UlanyjyTable = (props)=>{
+
+  const {dil} = useContext(ErkContext)
     const [data,setData]=props.data;
     const [select,setSelect]=useState(null);
     const GetData=props.GetData;
@@ -23,43 +26,48 @@ const UlanyjyTable = (props)=>{
 
     const columns = [
       {
-        title:"Ulanyjy Id",
+        title:(dil=="tm"?"Ulanyjy Id":"ID пользователя"),
         dataIndex:"id",
+        render:(text,record)=>(
+          <div style={{padding:"16px"}}>
+            {record.id}
+          </div>
+        )
      },
         {
-           title:"Ady ",
+           title:(dil=="tm"?"Ady ":"Имя"),
            dataIndex:"name",
         },
         {
-          title:"Familýasy",
+          title:(dil=="tm"?"Familýasy":"Фамилия"),
           dataIndex:"lastname",
        },
         {
-            title:"Telofon belgi",
+            title:(dil=="tm"?"Telofon belgi":"Номер телефона"),
             dataIndex:"phoneNumber",
         },
         {
-          title:"Mail",
+          title:(dil=="tm"?"Mail":"Почта"),
           dataIndex:"email",
         },
         {
-            title:"Ulanyjy Görnüş",
+            title:(dil=="tm"?"Ulanyjy Görnüş":"Тип пользователя"),
             dataIndex:"type",
             render:(text,record) =>(
               <div>
-                {record.type==1 && "User"}
-                {record.type==2 && "Admin"}
+                {record.type==1 && (dil=="tm"?"Ulanyjy":"Пользователь")}
+                {record.type==2 && (dil=="tm"?"Admin":"Админ")}
               </div>
             )
             
         },
         {
-            title:"Goşmaça maglumat we Özgertmek",
+            title:(dil=="tm"?"Goşmaça maglumat we Özgertmek":"Дополнительная информация и редактирование"),
             dataIndex:"goshmacha",
             render: (text, record) => (
                 <Space size="middle">
                     {/* <Button type='primary'shape='round'onClick={()=>ShowModal2(record)} ><EditOutlined /></Button> */}
-                    <Button type='primary'shape='round'onClick={()=>Sargyt(record)} >Sargyt</Button>
+                    <Button type='primary'shape='round'onClick={()=>Sargyt(record)} >{dil=="tm"?"Sargyt et":"Сделать заказ"}</Button>
                     {/* <Popconfirm 
                     title="Çyndan öçürmek isleýärsiňmi?"
                     onConfirm={()=>Confirm(record)}

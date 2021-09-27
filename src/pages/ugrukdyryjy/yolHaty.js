@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect, useContext} from 'react';
 import { Button,Input,Drawer } from 'antd';
 import "antd/dist/antd.css";
 import { PlusCircleFilled } from '@ant-design/icons';
@@ -8,8 +8,10 @@ import YolHatyTable from './yolHatyTable';
 import { axiosInstance } from '../../utils/axiosIntance';
 
 import './yolHaty.css';
+import { ErkContext } from '../../context/Condex';
 
 const YolHaty = prop =>{
+  const {dil} = useContext(ErkContext)
 
     const [Gosh,setGosh]=useState(false);
     const [sany,setSany] = useState(0);
@@ -45,7 +47,7 @@ const YolHaty = prop =>{
             <Drawer
                 width={400}
                 className='lukman-table--drawer'
-                title="Market Goş"
+                title={dil=="tm"?" Sorag Döret":"Создать вопрос"}
                 placement="right"
                 closable={true}
                 mask={true}

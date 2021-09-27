@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Input, Steps, Button, message, Upload } from "antd";
 import "antd/dist/antd.css";
@@ -7,9 +7,11 @@ import { axiosInstance } from "../../utils/axiosIntance";
 import "./yolHatyGosh.css";
 import axios from "axios";
 import fetch from "node-fetch";
+import { ErkContext } from "../../context/Condex";
 
 
 const YolHatyGosh = (props) => {
+  const {dil} = useContext(ErkContext)
 let getData = props.getData;
 
   const [ name_tm ,setName_tm] = useState();
@@ -54,12 +56,12 @@ let getData = props.getData;
               <Input 
               onChange={(e)=>{setName_tm(e.target.value)}} 
               value={name_tm} 
-              addonBefore="Ady tm" 
+              addonBefore={dil=="tm"?"Ady tm":"Имя tm"}
               className="yolHaty-gosh--input" />
               <Input 
               onChange={(e)=>{setName_ru(e.target.value)}} 
               value={name_ru} 
-              addonBefore="Ady ru" 
+              addonBefore={dil=="tm"?"Ady ru":"Имя ru"}
               className="yolHaty-gosh--input" />
              
               <br></br>
@@ -67,26 +69,26 @@ let getData = props.getData;
               <Input
                 onChange={(e)=>{setQuestion_tm(e.target.value)}}
                 value={question_tm}
-                addonBefore=" Sorag tm "
+                addonBefore={dil=="tm"?" Sorag tm ":"Вопрос tm"}
                 className="yolHaty-gosh--input"
               />
               <Input
                 onChange={(e)=>{setQuestion_ru(e.target.value)}}
                 value={question_ru}
-                addonBefore="Sorag ru"
+                addonBefore={dil=="tm"?" Sorag ru ":"Вопрос ru"}
                 className="yolHaty-gosh--input"
               />
               <br></br>
               <Input
                 onChange={(e)=>{setDescription_tm(e.target.value)}}
                 value={description_tm}
-                addonBefore="Jogap tm"
+                addonBefore={dil=="tm"?"Jogap tm":"Ответ tm"}
                 className="yolHaty-gosh--input suruji"
               />
               <Input
                 onChange={(e)=>{setDescription_ru(e.target.value)}}
                 value={description_ru}
-                addonBefore="Jogap ru"
+                addonBefore={dil=="tm"?"Jogap ru":"Ответ ru"}
                 className="yolHaty-gosh--input"
               />
               <br></br>
@@ -101,7 +103,7 @@ let getData = props.getData;
               type="primary" 
               onClick={()=>{onSubmit()}}
             >
-              Döret
+              {dil=="tm"?"Döret":"Создать"}
             </Button>
        
         </div>

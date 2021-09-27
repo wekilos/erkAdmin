@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useContext, useState} from 'react';
 
 import {Button,Space,message,Table,Modal,Drawer,Popconfirm} from 'antd';
 import "antd/dist/antd.css";
@@ -7,28 +7,35 @@ import { EditOutlined,DeleteOutlined } from '@ant-design/icons';
 import UnitEdit  from '../Orders/UnitEdit';
 import './LukmanTable.css';
 import { axiosInstance, BASE_URL } from '../../utils/axiosIntance';
+import { ErkContext } from '../../context/Condex';
 
 const LukmanTable = props=>{
 
+    const {dil} = useContext(ErkContext)
     const [data,setData]=props.data;
     const getOrders = props.getOrders;
 
     const columns = [
         {
-            title:"Gözleg No",
-            dataIndex:"id"
+            title:(dil=="tm"?"Sargyt №":"№ заказа"),
+            dataIndex:"id",
+            render:(text,record)=>(
+                <div style={{padding:"16px"}}>
+                    {record.id}
+                </div>
+            )
         },
         
         {
-            title:"Haryt ady",
+            title:(dil=="tm"?"Haryt ady":"Название товара"),
             dataIndex:"product_name"
         },
         {
-            title:"Umumy baha",
+            title:(dil=="tm"?"Umumy baha":"Итоговая цена"),
             dataIndex:"baha"
         },
         {
-            title:"Sany",
+            title:(dil=="tm"?"Sany":"Количество"),
             dataIndex:"sany"
         },
         // {
@@ -52,7 +59,7 @@ const LukmanTable = props=>{
 
         // },
         {
-            title:"Gözlege goylan wagty",
+            title:(dil=="tm"?"Gözlege goylan wagty":"Дата поиска"),
             dataIndex:"order_date_time",
             render:(text,record)=>(
                 <div>
@@ -63,7 +70,7 @@ const LukmanTable = props=>{
             )
         },
         {
-            title:"Önümçilik möhleti",
+            title:(dil=="tm"?"Önümçilik möhleti":"Сроки изготовления"),
             dataIndex:"onumchilik_mohleti",
             render:(text,record)=>(
                 <div>
@@ -74,15 +81,15 @@ const LukmanTable = props=>{
             )
         },
         {
-            title:"Saýtlar",
+            title:(dil=="tm"?"Saýtlar":"Ссылки сайтов"),
             dataIndex:"saytlar",
         },
         {
-            title:"Goşmaça talaplar",
+            title:(dil=="tm"?"Goşmaça talaplar":"Дополнительные требования"),
             dataIndex:"goshmachaTalaplar",
         },
         {
-            title:"Ulanyjy",
+            title:(dil=="tm"?"Ulanyjy":"Пользователь"),
             render:(text,record)=>(
                 
                 <div>
@@ -93,7 +100,7 @@ const LukmanTable = props=>{
             )
         },
         {
-            title:"Üýygetmek we Özgertmek",
+            title:(dil=="tm"?"Üýygetmek we Özgertmek":"Изменить"),
             dataIndex:"goshmacha",
             render: (text, record) => (
                 <div size="middle">
@@ -122,13 +129,13 @@ const LukmanTable = props=>{
                     
                     </Space>
                     <Space >
-                     <Button type='primary'shape='round'onClick={()=>ShowInformation(record)} >Goşmaça</Button>
+                     <Button type='primary'shape='round'onClick={()=>ShowInformation(record)} >{dil=="tm"?"Goşmaça":"Дополнительно"}</Button>
                      <Popconfirm
-                        title="Siz çyndan öçürmek isleýärsinizmi?"
+                        title={dil=="tm"?"Siz çyndan öçürmek isleýärsinizmi?":"Вы действительно хотите удалить?"}
                         onConfirm={()=>DeleteOrder(record)} 
                         // onCancel={cancel}
-                        okText="Howa"
-                        cancelText="Ýok"
+                        okText={dil=="tm"?"Howa":"да"}
+                        cancelText={dil=="tm"?"Ýok":"нет"}
                     >
                         <Button type='primary' shape='round' danger ><DeleteOutlined /></Button>                 
 
@@ -195,7 +202,7 @@ const Gowshuryldy = (event)=>{
                 <Drawer
                     width={500}
                     className='lukman-table--drawer'
-                    title="Goşmaça Maglumat"
+                    title={dil=="tm"?"Goşmaça Maglumat":"Дополнительная информация"}
                     placement="right"
                     onClose={()=>ShowInformation()}
                     visible={info}>
@@ -219,7 +226,7 @@ const Gowshuryldy = (event)=>{
                             </tr>
                             </table> */}
                             <h1 className="modalLi" key={maglumat && maglumat.id}>
-                             Haryt Surat
+                            {dil=="tm"?"Haryt Surat":"Изображение груза"}
                             </h1>
                             <div>
                             {maglumat && maglumat.product_image && <img style={{width:"400px", height:"200px",objectFit:"contain"}} src={BASE_URL+"/"+maglumat.product_image} alt="product Img" />} 

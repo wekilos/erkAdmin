@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { Input, Steps, Button, Drawer, message, Select } from "antd";
 import "antd/dist/antd.css";
@@ -9,9 +9,11 @@ import YolHatyGozle from "./yolHatyGozle";
 import YolHatyBerTable from "./yolHatyBerTable";
 
 import "./yolHatyBer.css";
+import { ErkContext } from "../../context/Condex";
 const { Option } = Select;
 
 const YolHatyBer = (props) => {
+  const {dil} = useContext(ErkContext)
   const [Gosh, setGosh] = useState(false);
   const GoshButton = () => {
     setGosh(!Gosh);
@@ -60,7 +62,7 @@ const YolHatyBer = (props) => {
       <Drawer
                 width={500}
                 className='lukman-table--drawer'
-                title="Market Goş"
+                title={dil=="tm"?"Şert Döret":"Создать условие"}
                 placement="right"
                 closable={true}
                 mask={true}
@@ -95,7 +97,7 @@ const YolHatyBer = (props) => {
             
           </Select> */}
           <h1>
-            Şertler Admin page
+           {dil=="tm"?" Şertler sahypasy":"Страница условий"}
           </h1>
         </div>
         <div>
@@ -106,7 +108,7 @@ const YolHatyBer = (props) => {
             icon={<PlusCircleFilled />}
             className="yolHaty-gozle--button"
           >
-            Şert Döret
+            {dil=="tm"?"Şert Döret":"Создать условие"}
           </Button>
         </div>
       </form>

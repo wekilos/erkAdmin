@@ -1,10 +1,11 @@
-import React from "react";
+import React,{useContext} from "react";
 import "antd/dist/antd.css";
 import "./header.css";
 import { Layout, Menu, Input, Dropdown, Badge, Popover } from "antd";
 
-import { UserOutlined, BellOutlined, LogoutOutlined } from "@ant-design/icons";
+import { UserOutlined, GlobalOutlined, LogoutOutlined } from "@ant-design/icons";
 import { logout } from "../utils/index";
+import {ErkContext} from "../context/Condex";
 const { Search } = Input;
 const content = (
   <div>
@@ -28,8 +29,22 @@ const profile_menu = (
   </Menu>
 );
 
-export default class Headers extends React.Component {
-  render() {
+ const Headers = ()=> {
+  const {dil,ChangeDil} = useContext(ErkContext);
+  const dil_menu = (
+    <Menu>
+      <Menu.Item onClick={()=>ChangeDil("tm")}>
+        <a href="#"  rel="noopener noreferrer">
+         {dil=="tm"?"Turkmen":"Туркменский"}
+        </a>
+      </Menu.Item>
+      <Menu.Item onClick={()=>ChangeDil("ru")}>
+        <a href="#"  rel="noopener noreferrer">
+           {dil=="tm"?"Rus":"Русский"}
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
     return (
       <Header
         className="site-layout-background header"
@@ -43,7 +58,16 @@ export default class Headers extends React.Component {
         <div className="App-title">
           Erk Trading
         </div>
-        <div className="profile">
+        <div className="profile" style={{display:"inline-flex",padding:"0 15px"}}>
+        <Dropdown overlay={dil_menu} style={{marginRight:"25px"}}>
+              <div style={{marginRight:"25px"}}
+                className="ant-dropdown-link"
+                // onClick={()=>logout()}
+              >
+                 {/* <img className="headerIcon" src={dilImg} alt="logout" /> */}
+                 <GlobalOutlined className="headerIcon"/>
+              </div>
+            </Dropdown>
           <Dropdown overlay={profile_menu}>
             <div
               className="ant-dropdown-link"
@@ -52,7 +76,11 @@ export default class Headers extends React.Component {
               <UserOutlined />
             </div>
           </Dropdown>
+          
         </div>
+        <div className="dil">
+            
+          </div>
 
         <div className="notify">
           {/* <Popover
@@ -69,4 +97,5 @@ export default class Headers extends React.Component {
       </Header>
     );
   }
-}
+
+  export default  Headers;
