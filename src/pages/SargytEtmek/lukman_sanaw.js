@@ -39,7 +39,8 @@ const Lukman = () =>{
                 number:number
             }
         }).then((data)=>{
-            setData(data.data);
+            // setData(data.data);
+            console.log(data.data)
         }).catch((err)=>{
             console.log(err);
         })

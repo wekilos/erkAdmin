@@ -1,2 +1,0 @@
-(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[31],{377:function(t,a,e){"use strict";e.r(a);e(0);var s=e(382),n=e(103),r=e(1);a.default=function(){return Object(r.jsx)(s.a,{status:"404",title:"404",subTitle:"Sahypa tapylmady",extra:Object(r.jsx)(n.a,{type:"primary",children:"Bas shypa"})})}}}]);
-//# sourceMappingURL=31.21588b1c.chunk.js.map
