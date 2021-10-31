@@ -91,10 +91,11 @@ const  toggle = () => {
             key="sub1"
             title={
               <span>
-                <DashboardOutlined />
+                <DashboardOutlined/>
                 <span className="menuitem ">{dil=="tm"?"Sargytlar":"Заказы"}</span>
               </span>
             }
+            
           >
             <Menu.Item className="menuitem menuitem2" key="1">
               <Link to="orders">{dil=="tm"?"Sargytlar":"Заказы"}</Link>

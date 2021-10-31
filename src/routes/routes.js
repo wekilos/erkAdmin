@@ -36,6 +36,7 @@ const App = () => {
             exact 
             />
             
+            
             <PrivateRoute
               restricted={false}
               component={Users}
