@@ -3,7 +3,7 @@ import { token} from './token'
 // 95.85.120.183
 // 23.111.202.6   erking oz serveri
 // 31.31.201.41
- const BASE_URL = 'http://localhost:1234'
+ const BASE_URL = 'http://31.31.201.41:1234'
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: 10000,
